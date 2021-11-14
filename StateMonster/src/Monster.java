@@ -1,10 +1,11 @@
 public class Monster {
     private State state;
-    private int playersInRange = 0;
+    private int playersInRange;
     boolean alive = true;
 
     public Monster(){
         this.state = new IdleState(this);
+        this.playersInRange = 0;
     }
 
     public void changeState(State state){
@@ -30,6 +31,6 @@ public class Monster {
     public boolean isAlive() { return this.alive; }
 
     public boolean hasPlayersInRange(){
-        return playersInRange == 0;
+        return playersInRange > 0;
     }
 }

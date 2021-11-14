@@ -19,41 +19,14 @@ class IdleState extends State {
 
     @Override
     public String playerEnteredSight() {
-        return "Monster can't attack when idle!";
-    }
-
-    @Override
-    public String playerLeftSight(){
-        return "Monster likely never saw a player to begin with.";
-    }
-
-    @Override
-    public String monsterKilled() {
-        monster.changeState(new DeadState(monster));
-        return "Monster now dead (due to natural causes).";
-    }
-
-    @Override
-    public String monsterRevived() {
-        return null;
-    }
-}
-
-class ActiveState extends State {
-
-    ActiveState(Monster monster){
-        super(monster);
-    }
-
-    @Override
-    public String playerEnteredSight() {
+        monster.addPlayer();
         monster.changeState(new AggressiveState(monster));
-        return "Monster now attacking!";
+        return "Monster is now hunting a player!";
     }
 
     @Override
     public String playerLeftSight() {
-        return "Monster likely never saw a player to begin with";
+        return "Monster has likely never seen players...";
     }
 
     @Override
@@ -64,7 +37,7 @@ class ActiveState extends State {
 
     @Override
     public String monsterRevived() {
-        return null;
+        return "Revival was ineffective due to the monster being alive.";
     }
 }
 
@@ -100,7 +73,7 @@ class AggressiveState extends State {
 
     @Override
     public String monsterRevived() {
-        return "Monster can't be revived when alive!";
+        return "Revival was ineffective due to the monster being alive.";
     }
 }
 
